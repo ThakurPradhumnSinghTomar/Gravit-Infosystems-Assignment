@@ -1,0 +1,4 @@
+import { useEffect,useState } from 'react';
+import api from '../services/api';
+import { Link } from 'react-router-dom';
+export default function Events(){const [events,setEvents]=useState([]); const [q,setQ]=useState(''); useEffect(()=>{api.get('/events').then(r=>setEvents(r.data));},[]); const filtered=events.filter(e=>e.title.toLowerCase().includes(q.toLowerCase())); return <div className='p-6'><input className='p-2 border rounded mb-4' placeholder='Search events' value={q} onChange={e=>setQ(e.target.value)}/><div className='grid md:grid-cols-3 gap-4'>{filtered.map(e=><Link key={e.id} to={`/events/${e.id}`} className='glass rounded-2xl p-4 shadow'><img src={e.image} className='h-40 w-full object-cover rounded-xl'/><h3 className='font-semibold mt-3'>{e.title}</h3><p>{e.location}</p><p>${e.price}</p></Link>)}</div></div>}

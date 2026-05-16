@@ -1,0 +1,1 @@
+export default function Login(){return <div className='p-6'>Login page (implement form + JWT storage)</div>}
